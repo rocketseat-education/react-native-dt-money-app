@@ -2,6 +2,8 @@
 
 # dependencies
 node_modules/
+pnpm-lock.yaml
+.npmrc
 
 # Expo
 .expo/
@@ -34,3 +36,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# VSCode
+.vscode

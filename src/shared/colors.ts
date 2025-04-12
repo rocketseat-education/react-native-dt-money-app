@@ -1,0 +1,21 @@
+export const colors = {
+  'accent-brand-background-primary': '#015F43',
+  'accent-brand': '#00875F',
+  'accent-brand-light': '#00B37E',
+  'accent-red-background-primary': '#AA2834',
+  'accent-red': '#F75A68',
+  'accent-blue': '#5A86F7',
+  'accent-blue-background-primary': '#284DAA',
+  'background-primary': '#121214',
+  'background-secondary': '#202024',
+  'background-tertiary': '#29292E',
+  white: '#FFFFFF',
+  gray: {
+    800: '#323238',
+    700: '#7C7C8A',
+    600: '#949494',
+    500: '#C4C4CC',
+    400: '#E1E1E6',
+    300: '#666666',
+  },
+}
