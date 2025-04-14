@@ -1,7 +1,11 @@
-import { PublicStackParamsList } from '@/routes'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Text, TouchableOpacity, View } from 'react-native'
+
+export type PublicStackParamsList = {
+  Login: undefined
+  Register: undefined
+}
 
 export const Login = () => {
   const navigation = useNavigation<StackNavigationProp<PublicStackParamsList>>()
