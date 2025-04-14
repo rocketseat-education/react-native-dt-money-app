@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "@rocketseat/eslint-config/react"
-  ],
-  "rules": {
-    "@typescript-eslint/no-var-requires": "off"
-  }
-}

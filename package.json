@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^7.1.6",
+    "@react-navigation/stack": "^7.2.10",
     "expo": "~52.0.43",
     "expo-status-bar": "~2.0.1",
     "nativewind": "^4.1.23",
@@ -16,15 +18,17 @@
     "react-native": "0.76.9",
     "react-native-reanimated": "3.16.2",
     "react-native-safe-area-context": "4.12.0",
-    "tailwindcss": "^3.4.17"
+    "react-native-screens": "~4.4.0",
+    "tailwindcss": "^3.4.17",
+    "react-native-gesture-handler": "~2.20.2"
   },
   "devDependencies": {
+    "@arthurrios/biomejs-config": "^1.0.4",
     "@babel/core": "^7.25.2",
     "@babel/runtime": "^7.27.0",
-    "@rocketseat/eslint-config": "^2.2.2",
+    "@biomejs/biome": "^1.9.4",
     "@types/react": "~18.3.12",
     "babel-plugin-module-resolver": "^5.0.2",
-    "eslint": "^8.57.1",
     "typescript": "^5.3.3"
   },
   "private": true

@@ -39,3 +39,6 @@ yarn-error.*
 
 # VSCode
 .vscode
+
+# Biome
+biome.json
