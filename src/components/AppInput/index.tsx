@@ -23,9 +23,11 @@ export const AppInput = <T extends FieldValues>({
   name,
   lable,
   leftIconName,
+  secureTextEntry,
   ...rest
 }: AppInputParams<T>) => {
   const [isFocused, setIsFocused] = useState(false)
+  const [showText, setShowText] = useState(secureTextEntry)
   const inputRef = useRef<TextInput>(null)
 
   const checkFocus = () => {
@@ -68,9 +70,22 @@ export const AppInput = <T extends FieldValues>({
                 className="flex-1 text-base text-gray-500"
                 onFocus={checkFocus}
                 onEndEditing={checkFocus}
+                secureTextEntry={showText}
                 ref={inputRef}
                 {...rest}
               />
+
+              {secureTextEntry && (
+                <TouchableOpacity
+                  onPress={() => setShowText((value) => !value)}
+                >
+                  <MaterialIcons
+                    name={showText ? 'visibility' : 'visibility-off'}
+                    color={colors.gray[600]}
+                    size={24}
+                  />
+                </TouchableOpacity>
+              )}
             </TouchableOpacity>
           </View>
         )
