@@ -1,3 +1,7 @@
+import { colors } from '@/shared/colors'
+import { MaterialIcons } from '@expo/vector-icons'
+import clsx from 'clsx'
+import { useRef, useState } from 'react'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import {
   Text,
@@ -6,10 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
-import { colors } from '@/shared/colors'
-import { useRef, useState } from 'react'
-import clsx from 'clsx'
 
 interface AppInputParams<T extends FieldValues> extends TextInputProps {
   control: Control<T>
