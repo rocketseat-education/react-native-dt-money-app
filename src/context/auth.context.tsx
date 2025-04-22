@@ -7,9 +7,11 @@ import {
   useContext,
   useState,
 } from 'react'
+import * as authService from '@/shared/services/dt-money/auth.service'
+import { IUser } from '@/shared/interfaces/user-interface'
 
 type AuthContextType = {
-  user: null
+  user: IUser | null
   token: string | null
   handleAuthenticate: (params: FormLoginParams) => Promise<void>
   handleRegister: (params: FormRegisterParams) => Promise<void>
@@ -19,12 +21,17 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState(null)
+  const [user, setUser] = useState<IUser | null>(null)
+  const [token, setToken] = useState<string | null>(null)
 
-  const handleAuthenticate = async ({ email, password }: FormLoginParams) => {}
+  const handleAuthenticate = async (userData: FormLoginParams) => {
+    const { token, user } = await authService.authenticate(userData)
+    setUser(user)
+    setToken(token)
+  }
 
   const handleRegister = async (formData: FormRegisterParams) => {}
+
   const handleLogout = () => {}
 
   return (
