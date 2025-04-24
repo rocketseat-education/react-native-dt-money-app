@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './schema'
 import { useAuthContext } from '@/context/auth.context'
 import { AxiosError } from 'axios'
+import { AppError } from '@/shared/helpers/AppError'
 
 export interface FormLoginParams {
   email: string
@@ -35,6 +36,7 @@ export const LoginForm = () => {
     try {
       await handleAuthenticate(userData)
     } catch (error) {
+      console.log(error instanceof AppError)
       if (error instanceof AxiosError) {
         console.log(error.response?.data)
       }
