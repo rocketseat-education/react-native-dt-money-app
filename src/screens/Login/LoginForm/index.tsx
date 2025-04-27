@@ -7,8 +7,8 @@ import { Text, View } from 'react-native'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from './schema'
 import { useAuthContext } from '@/context/auth.context'
-import { AxiosError } from 'axios'
 import { AppError } from '@/shared/helpers/AppError'
+import { useSnackbarContext } from '@/context/snackbar.context'
 
 export interface FormLoginParams {
   email: string
@@ -29,6 +29,7 @@ export const LoginForm = () => {
   })
 
   const { handleAuthenticate } = useAuthContext()
+  const { notify } = useSnackbarContext()
 
   const navigation = useNavigation<NavigationProp<PublicStackParamsList>>()
 
@@ -36,9 +37,11 @@ export const LoginForm = () => {
     try {
       await handleAuthenticate(userData)
     } catch (error) {
-      console.log(error instanceof AppError)
-      if (error instanceof AxiosError) {
-        console.log(error.response?.data)
+      if (error instanceof AppError) {
+        notify({
+          message: error.message,
+          type: 'ERROR',
+        })
       }
     }
   }
