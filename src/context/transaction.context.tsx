@@ -19,7 +19,6 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
   const [categories, setCategories] = useState<TransactionCategory[]>([])
-  console.log(categories)
 
   const fetchCategories = async () => {
     const categoriesResponse =
