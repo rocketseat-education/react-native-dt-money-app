@@ -7,10 +7,12 @@ import {
   useState,
 } from 'react'
 import * as transactionService from '@/shared/services/dt-money/transaction.service'
+import { CreateTransactionInterface } from '@/shared/interfaces/https/create-transaction-request'
 
 export type TransactionContextType = {
   fetchCategories: () => Promise<void>
   categories: TransactionCategory[]
+  createTransaction: (transaction: CreateTransactionInterface) => Promise<void>
 }
 
 export const TransactionContext = createContext({} as TransactionContextType)
@@ -26,8 +28,14 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
     setCategories(categoriesResponse)
   }
 
+  const createTransaction = async (transaction: CreateTransactionInterface) => {
+    await transactionService.createTransaction(transaction)
+  }
+
   return (
-    <TransactionContext.Provider value={{ categories, fetchCategories }}>
+    <TransactionContext.Provider
+      value={{ categories, fetchCategories, createTransaction }}
+    >
       {children}
     </TransactionContext.Provider>
   )
