@@ -17,6 +17,7 @@
     "@types/qs": "^6.14.0",
     "axios": "^1.8.4",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "expo": "^52.0.46",
     "expo-checkbox": "~4.0.1",
     "expo-status-bar": "~2.0.1",
