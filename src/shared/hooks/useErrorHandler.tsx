@@ -13,7 +13,7 @@ export const useErrorHandler = () => {
 
     notify({
       message,
-      type: 'ERROR',
+      messageType: 'ERROR',
     })
   }
 

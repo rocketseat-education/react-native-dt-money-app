@@ -10,7 +10,7 @@ export type SnackbarMessageType = 'ERROR' | 'SUCCESS'
 
 interface NotifyMessageParams {
   message: string | null
-  type: SnackbarMessageType
+  messageType: SnackbarMessageType
 }
 
 export type SnackbarContextType = {
@@ -27,9 +27,9 @@ export const SnackbarContextProvider: FC<PropsWithChildren> = ({
   const [message, setMessage] = useState<string | null>(null)
   const [type, setType] = useState<SnackbarMessageType | null>(null)
 
-  const notify = ({ message, type }: NotifyMessageParams) => {
+  const notify = ({ message, messageType }: NotifyMessageParams) => {
     setMessage(message)
-    setType(type)
+    setType(messageType)
     setTimeout(() => {
       setMessage(null)
       setType(null)
