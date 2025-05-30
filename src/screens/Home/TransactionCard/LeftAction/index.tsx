@@ -4,6 +4,7 @@ import { Pressable, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { colors } from '@/shared/colors'
 import { useBottomSheetContext } from '@/context/bottomsheet.context'
+import { EditTransactionForm } from './EditTransactionForm'
 
 interface Params {
   transaction: Transaction
@@ -15,7 +16,7 @@ export const LeftAction: FC<Params> = ({ transaction }) => {
   return (
     <Pressable
       onPress={() => {
-        openBottomSheet(<></>, 1)
+        openBottomSheet(<EditTransactionForm transaction={transaction} />, 1)
       }}
     >
       <View className="h-[140] bg-accent-blue-background-primary w-[80] rounded-l-md items-center justify-center">
