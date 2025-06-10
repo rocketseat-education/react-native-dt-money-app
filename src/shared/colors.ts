@@ -5,7 +5,7 @@ export const colors = {
   'accent-red-background-primary': '#AA2834',
   'accent-red': '#F75A68',
   'accent-blue': '#5A86F7',
-  'accent-blue-background-primary': '#284DAA',
+  'accent-blue-dark': '#284DAA',
   'background-primary': '#121214',
   'background-secondary': '#202024',
   'background-tertiary': '#29292E',

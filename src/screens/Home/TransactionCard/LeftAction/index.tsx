@@ -19,7 +19,7 @@ export const LeftAction: FC<Params> = ({ transaction }) => {
         openBottomSheet(<EditTransactionForm transaction={transaction} />, 1)
       }}
     >
-      <View className="h-[140] bg-accent-blue-background-primary w-[80] rounded-l-md items-center justify-center">
+      <View className="h-[140] bg-accent-blue-dark w-[80] rounded-l-md items-center justify-center">
         <MaterialIcons name="edit" size={30} color={colors.white} />
       </View>
     </Pressable>
