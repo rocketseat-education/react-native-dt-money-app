@@ -18,6 +18,17 @@ interface FetchTransactionParams {
   page: number
 }
 
+interface Loadings {
+  initial: boolean
+  refresh: boolean
+  loadMore: boolean
+}
+
+interface HandleLoadingParams {
+  key: keyof Loadings
+  value: boolean
+}
+
 export type TransactionContextType = {
   fetchCategories: () => Promise<void>
   categories: TransactionCategory[]
@@ -27,8 +38,9 @@ export type TransactionContextType = {
   totalTransactions: TotalTransactions
   transactions: Transaction[]
   refreshTransactions: () => void
-  loading: boolean
   loadMoreTransactions: () => Promise<void>
+  loadings: Loadings
+  handleLoadings: (params: HandleLoadingParams) => void
 }
 
 export const TransactionContext = createContext({} as TransactionContextType)
@@ -38,7 +50,11 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
 }) => {
   const [categories, setCategories] = useState<TransactionCategory[]>([])
   const [transactions, setTransactions] = useState<Transaction[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loadings, setLoadings] = useState({
+    initial: false,
+    refresh: false,
+    loadMore: false,
+  })
   const [totalTransactions, setTotalTransactions] = useState<TotalTransactions>(
     {
       expense: 0,
@@ -54,10 +70,11 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
     totalPages: 0,
   })
 
+  const handleLoadings = ({ key, value }: HandleLoadingParams) =>
+    setLoadings((prevValue) => ({ ...prevValue, [key]: value }))
+
   const refreshTransactions = useCallback(async () => {
     const { page, perPage } = pagination
-
-    setLoading(true)
     const transactionsResponse = await transactionService.getTransactions({
       page: 1,
       perPage: page * perPage,
@@ -70,7 +87,6 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
       totalPages: transactionsResponse.totalPages,
       totalRows: transactionsResponse.totalRows,
     })
-    setLoading(false)
   }, [pagination])
 
   const fetchCategories = async () => {
@@ -91,8 +107,6 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
 
   const fetchTransactions = useCallback(
     async ({ page = 1 }: FetchTransactionParams) => {
-      setLoading(true)
-
       const transactionsResponse = await transactionService.getTransactions({
         page,
         perPage: pagination.perPage,
@@ -113,15 +127,14 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
         totalRows: transactionsResponse.totalRows,
         totalPages: transactionsResponse.totalPages,
       })
-      setLoading(false)
     },
     [pagination],
   )
 
   const loadMoreTransactions = useCallback(async () => {
-    if (loading || pagination.page >= pagination.totalPages) return
+    if (loadings.loadMore || pagination.page >= pagination.totalPages) return
     fetchTransactions({ page: pagination.page + 1 })
-  }, [loading, pagination])
+  }, [loadings.loadMore, pagination])
 
   return (
     <TransactionContext.Provider
@@ -134,8 +147,9 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({
         transactions,
         updateTransaction,
         refreshTransactions,
-        loading,
         loadMoreTransactions,
+        handleLoadings,
+        loadings,
       }}
     >
       {children}

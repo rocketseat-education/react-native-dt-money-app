@@ -13,40 +13,77 @@ export const Home = () => {
     fetchTransactions,
     transactions,
     refreshTransactions,
-    loading,
     loadMoreTransactions,
+    handleLoadings,
+    loadings,
   } = useTransactionContext()
   const { handleError } = useErrorHandler()
 
   const handleFetchCategories = async () => {
     try {
+      handleLoadings({
+        key: 'initial',
+        value: true,
+      })
       await fetchCategories()
     } catch (error) {
       handleError(error)
+    } finally {
+      handleLoadings({
+        key: 'initial',
+        value: false,
+      })
     }
   }
 
   const handleFetchInitialTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'initial',
+        value: true,
+      })
       await fetchTransactions({ page: 1 })
     } catch (error) {
       handleError(error, 'Falha ao buscar transações')
+    } finally {
+      handleLoadings({
+        key: 'initial',
+        value: false,
+      })
     }
   }
 
   const handleLoadMoreTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'loadMore',
+        value: true,
+      })
       await loadMoreTransactions()
     } catch (error) {
       handleError(error, 'Falha ao carregar novas transações')
+    } finally {
+      handleLoadings({
+        key: 'loadMore',
+        value: false,
+      })
     }
   }
 
   const handleRefreshTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'refresh',
+        value: true,
+      })
       await refreshTransactions()
     } catch (error) {
       handleError(error, 'Falha ao recarregar as transações')
+    } finally {
+      handleLoadings({
+        key: 'refresh',
+        value: false,
+      })
     }
   }
 
@@ -71,7 +108,7 @@ export const Home = () => {
         onEndReachedThreshold={0.5}
         refreshControl={
           <RefreshControl
-            refreshing={loading}
+            refreshing={loadings.refresh}
             onRefresh={handleRefreshTransactions}
           />
         }
