@@ -5,10 +5,16 @@ import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ListHeader } from './ListHeader'
 import { TransactionCard } from './TransactionCard'
+import { RefreshControl } from 'react-native-gesture-handler'
 
 export const Home = () => {
-  const { fetchCategories, fetchTransactions, transactions } =
-    useTransactionContext()
+  const {
+    fetchCategories,
+    fetchTransactions,
+    transactions,
+    refreshTransactions,
+    loading,
+  } = useTransactionContext()
   const { handleError } = useErrorHandler()
 
   const handleFetchCategories = async () => {
@@ -33,6 +39,12 @@ export const Home = () => {
         keyExtractor={({ id }) => `transaction-${id}`}
         data={transactions}
         renderItem={({ item }) => <TransactionCard transaction={item} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={refreshTransactions}
+          />
+        }
       />
     </SafeAreaView>
   )
