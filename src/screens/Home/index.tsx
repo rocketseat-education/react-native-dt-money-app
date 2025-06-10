@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ListHeader } from './ListHeader'
 import { TransactionCard } from './TransactionCard'
 import { RefreshControl } from 'react-native-gesture-handler'
+import { EmptyList } from './EmptyList'
 
 export const Home = () => {
   const {
@@ -106,6 +107,7 @@ export const Home = () => {
         ListHeaderComponent={ListHeader}
         onEndReached={handleLoadMoreTransactions}
         onEndReachedThreshold={0.5}
+        ListEmptyComponent={loadings.initial ? null : EmptyList}
         refreshControl={
           <RefreshControl
             refreshing={loadings.refresh}
