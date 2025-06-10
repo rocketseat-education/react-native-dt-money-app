@@ -1,12 +1,13 @@
 import { useTransactionContext } from '@/context/transaction.context'
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler'
 import { useEffect } from 'react'
-import { FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ListHeader } from './ListHeader'
 import { TransactionCard } from './TransactionCard'
 import { RefreshControl } from 'react-native-gesture-handler'
 import { EmptyList } from './EmptyList'
+import { colors } from '@/shared/colors'
 
 export const Home = () => {
   const {
@@ -108,6 +109,14 @@ export const Home = () => {
         onEndReached={handleLoadMoreTransactions}
         onEndReachedThreshold={0.5}
         ListEmptyComponent={loadings.initial ? null : EmptyList}
+        ListFooterComponent={
+          loadings.loadMore ? (
+            <ActivityIndicator
+              color={colors['accent-brand-light']}
+              size="large"
+            />
+          ) : null
+        }
         refreshControl={
           <RefreshControl
             refreshing={loadings.refresh}
