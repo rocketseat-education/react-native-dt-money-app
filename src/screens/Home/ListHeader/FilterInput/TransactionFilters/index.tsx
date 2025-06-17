@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { colors } from '@/shared/colors'
 import { useBottomSheetContext } from '@/context/bottomsheet.context'
 import { DateFilter } from './DateFilter'
+import { CategoryFilter } from './CategoryFilter'
 
 export const TransactionsFilters = () => {
   const { closeBottomSheet } = useBottomSheetContext()
@@ -19,6 +20,7 @@ export const TransactionsFilters = () => {
       </View>
 
       <DateFilter />
+      <CategoryFilter />
     </View>
   )
 }
