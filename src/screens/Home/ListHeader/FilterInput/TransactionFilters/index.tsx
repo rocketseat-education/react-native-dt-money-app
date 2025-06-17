@@ -4,6 +4,7 @@ import { colors } from '@/shared/colors'
 import { useBottomSheetContext } from '@/context/bottomsheet.context'
 import { DateFilter } from './DateFilter'
 import { CategoryFilter } from './CategoryFilter'
+import { TypeFilter } from './TypeFilter'
 
 export const TransactionsFilters = () => {
   const { closeBottomSheet } = useBottomSheetContext()
@@ -21,6 +22,7 @@ export const TransactionsFilters = () => {
 
       <DateFilter />
       <CategoryFilter />
+      <TypeFilter />
     </View>
   )
 }
