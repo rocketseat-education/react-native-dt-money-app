@@ -67,7 +67,7 @@ export const DateFilter = () => {
               )}
             >
               {formatDate(filters.to) || 'Até'}
-            </Text>{' '}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
