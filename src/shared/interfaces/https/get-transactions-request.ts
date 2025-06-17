@@ -26,3 +26,10 @@ export interface GetTransactionsResponse {
   perPage: number
   totalTransactions: TotalTransactions
 }
+
+export interface Filters {
+  from?: Date
+  to?: Date
+  typeId?: number
+  categoryIds: Record<number, boolean>
+}
